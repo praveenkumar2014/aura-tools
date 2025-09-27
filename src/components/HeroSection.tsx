@@ -35,7 +35,7 @@ export const HeroSection = ({ onSearch }: HeroSectionProps) => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-mesh hero-bg">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-mesh hero-bg bg-gradient-to-br from-background via-slate-50 to-orange-50 dark:from-background dark:via-slate-900 dark:to-slate-800">
       {/* Floating Icons */}
       {floatingIcons.map(({ Icon, delay, position }, index) => (
         <motion.div
@@ -70,11 +70,14 @@ export const HeroSection = ({ onSearch }: HeroSectionProps) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8 flex items-center justify-center gap-4"
           >
-            <img 
-              src={logo} 
-              alt="GS AI Tools" 
-              className="w-16 h-16 float-animation"
-            />
+            <div className="relative">
+              <img 
+                src={logo} 
+                alt="GS AI Tools" 
+                className="w-16 h-16 float-animation drop-shadow-2xl"
+              />
+              <div className="absolute inset-0 w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full blur-xl opacity-30 animate-pulse"></div>
+            </div>
             <h1 className="text-5xl lg:text-7xl font-bold gradient-text glow-primary">
               GS AI Tools
             </h1>

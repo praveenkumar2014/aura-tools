@@ -1,5 +1,19 @@
 import { AITool } from '@/components/ToolCard';
 
+// Import app icons
+import chatgptIcon from '@/assets/icons/chatgpt-icon.png';
+import midjourneyIcon from '@/assets/icons/midjourney-icon.png';
+import notionIcon from '@/assets/icons/notion-icon.png';
+import runwayIcon from '@/assets/icons/runway-icon.png';
+import jasperIcon from '@/assets/icons/jasper-icon.png';
+import grammarlyIcon from '@/assets/icons/grammarly-icon.png';
+import stableDiffusionIcon from '@/assets/icons/stablediffusion-icon.png';
+import githubIcon from '@/assets/icons/github-icon.png';
+import canvaIcon from '@/assets/icons/canva-icon.png';
+import copyaiIcon from '@/assets/icons/copyai-icon.png';
+import loomIcon from '@/assets/icons/loom-icon.png';
+import synthesiaIcon from '@/assets/icons/synthesia-icon.png';
+
 export const sampleTools: AITool[] = [
   {
     id: '1',
@@ -9,6 +23,7 @@ export const sampleTools: AITool[] = [
     rating: 5,
     price: 'Freemium',
     isPremium: true,
+    image: chatgptIcon,
     tags: ['writing', 'coding', 'analysis', 'conversation'],
     url: 'https://chat.openai.com'
   },
@@ -20,6 +35,7 @@ export const sampleTools: AITool[] = [
     rating: 5,
     price: 'Paid',
     isPremium: true,
+    image: midjourneyIcon,
     tags: ['art', 'images', 'creative', 'design'],
     url: 'https://midjourney.com'
   },
@@ -30,6 +46,7 @@ export const sampleTools: AITool[] = [
     category: 'Productivity',
     rating: 4,
     price: 'Freemium',
+    image: notionIcon,
     tags: ['productivity', 'writing', 'organization', 'workspace'],
     url: 'https://notion.so'
   },
@@ -41,6 +58,7 @@ export const sampleTools: AITool[] = [
     rating: 4,
     price: 'Freemium',
     isPremium: true,
+    image: runwayIcon,
     tags: ['video', 'editing', 'generation', 'creative'],
     url: 'https://runwayml.com'
   },
@@ -51,6 +69,7 @@ export const sampleTools: AITool[] = [
     category: 'Marketing',
     rating: 4,
     price: 'Paid',
+    image: jasperIcon,
     tags: ['copywriting', 'marketing', 'content', 'business'],
     url: 'https://jasper.ai'
   },
@@ -61,6 +80,7 @@ export const sampleTools: AITool[] = [
     category: 'Writing',
     rating: 4,
     price: 'Freemium',
+    image: grammarlyIcon,
     tags: ['grammar', 'writing', 'editing', 'proofreading'],
     url: 'https://grammarly.com'
   },
@@ -71,6 +91,7 @@ export const sampleTools: AITool[] = [
     category: 'Image Generation',
     rating: 4,
     price: 'Free',
+    image: stableDiffusionIcon,
     tags: ['images', 'open-source', 'creative', 'art'],
     url: 'https://stability.ai'
   },
@@ -82,6 +103,7 @@ export const sampleTools: AITool[] = [
     rating: 5,
     price: 'Paid',
     isPremium: true,
+    image: githubIcon,
     tags: ['coding', 'programming', 'development', 'productivity'],
     url: 'https://github.com/features/copilot'
   },
@@ -92,6 +114,7 @@ export const sampleTools: AITool[] = [
     category: 'Design',
     rating: 4,
     price: 'Freemium',
+    image: canvaIcon,
     tags: ['design', 'graphics', 'presentations', 'marketing'],
     url: 'https://canva.com'
   },
@@ -102,6 +125,7 @@ export const sampleTools: AITool[] = [
     category: 'Marketing',
     rating: 4,
     price: 'Freemium',
+    image: copyaiIcon,
     tags: ['copywriting', 'content', 'marketing', 'social media'],
     url: 'https://copy.ai'
   },
@@ -112,6 +136,7 @@ export const sampleTools: AITool[] = [
     category: 'Video & Media',
     rating: 4,
     price: 'Freemium',
+    image: loomIcon,
     tags: ['screen recording', 'video', 'summaries', 'transcription'],
     url: 'https://loom.com'
   },
@@ -123,6 +148,7 @@ export const sampleTools: AITool[] = [
     rating: 4,
     price: 'Paid',
     isPremium: true,
+    image: synthesiaIcon,
     tags: ['video', 'AI avatars', 'presentation', 'content creation'],
     url: 'https://synthesia.io'
   }

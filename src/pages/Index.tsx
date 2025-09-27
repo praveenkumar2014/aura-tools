@@ -276,12 +276,12 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-12 px-4 border-t border-white/10 relative z-10">
         <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-8 h-8 gradient-bg-primary rounded-lg flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-bold text-xl gradient-text">GS AI Tools</span>
-          </div>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="w-8 h-8 gradient-bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                  <Sparkles className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-bold text-xl gradient-text">GS AI Tools</span>
+              </div>
           <p className="text-muted-foreground">
             Discover, Learn & Master the Future of AI Tools
           </p>

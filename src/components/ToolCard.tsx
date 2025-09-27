@@ -35,7 +35,7 @@ export const ToolCard = ({ tool, onLearnMore }: ToolCardProps) => {
     <motion.div
       whileHover={{ 
         y: -8, 
-        boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.25)" 
+        boxShadow: "0 25px 50px -12px rgba(26, 54, 93, 0.25)"  // Dark blue shadow 
       }}
       whileTap={{ scale: 0.98 }}
       className="cursor-pointer tool-card"
@@ -52,9 +52,19 @@ export const ToolCard = ({ tool, onLearnMore }: ToolCardProps) => {
             </div>
           )}
           
-          {/* Tool Icon/Image Placeholder */}
-          <div className="w-12 h-12 rounded-xl gradient-bg-secondary flex items-center justify-center mb-3 float-animation">
-            <Zap className="w-6 h-6 text-white" />
+          {/* Tool Icon/Image */}
+          <div className="w-12 h-12 rounded-xl overflow-hidden mb-3 float-animation shadow-lg">
+            {tool.image ? (
+              <img 
+                src={tool.image} 
+                alt={`${tool.name} icon`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full gradient-bg-secondary flex items-center justify-center">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+            )}
           </div>
           
           <div>

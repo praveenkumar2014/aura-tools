@@ -48,10 +48,10 @@ export const ParticleBackground = () => {
     },
     particles: {
       color: {
-        value: ["#a855f7", "#06b6d4", "#10b981", "#f59e0b"],
+        value: ["#1a365d", "#ff8c00", "#ff6b35"],  // Dark blue and orange theme
       },
       links: {
-        color: "#a855f7",
+        color: "#1a365d",  // Dark blue links
         distance: 150,
         enable: false,
         opacity: 0.2,
