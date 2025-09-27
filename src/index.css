@@ -2,95 +2,141 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system with modern vibe aesthetics 
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Core Vibe Colors */
+    --background: 220 20% 97%;
+    --foreground: 240 10% 4%;
+    
+    /* Glassmorphism Base */
+    --glass-background: 0 0% 100%;
+    --glass-border: 220 13% 91%;
+    
+    /* Gradient Colors */
+    --gradient-primary-start: 270 91% 65%;
+    --gradient-primary-end: 315 100% 70%;
+    --gradient-secondary-start: 195 100% 65%;
+    --gradient-secondary-end: 270 91% 65%;
+    --gradient-accent-start: 110 86% 60%;
+    --gradient-accent-end: 195 100% 65%;
+    
+    /* Card & UI */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 240 10% 4%;
+    --card-glass: 220 20% 98%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
+    --popover-foreground: 240 10% 4%;
+    
+    /* Brand Colors */
+    --primary: 270 91% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 270 91% 75%;
+    
+    --secondary: 195 100% 65%;
+    --secondary-foreground: 240 10% 4%;
+    
+    --accent: 110 86% 60%;
+    --accent-foreground: 240 10% 4%;
+    
+    --muted: 220 13% 95%;
+    --muted-foreground: 240 5% 45%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 270 91% 65%;
+    
+    /* Vibe Effects */
+    --glow-primary: 270 91% 65%;
+    --glow-secondary: 195 100% 65%;
+    --glow-accent: 110 86% 60%;
+    --particle-primary: 270 91% 65%;
+    --particle-secondary: 195 100% 65%;
+    --shimmer: 0 0% 100%;
+    
+    --radius: 1rem;
+    
+    /* Sidebar */
+    --sidebar-background: 220 20% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 270 91% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 13% 95%;
+    --sidebar-accent-foreground: 240 5% 26%;
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 270 91% 65%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    /* Core Dark Vibe Colors */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    
+    /* Dark Glassmorphism */
+    --glass-background: 240 10% 8%;
+    --glass-border: 240 4% 20%;
+    
+    /* Dark Gradients (same hues, adjusted for dark mode) */
+    --gradient-primary-start: 270 91% 55%;
+    --gradient-primary-end: 315 100% 60%;
+    --gradient-secondary-start: 195 100% 55%;
+    --gradient-secondary-end: 270 91% 55%;
+    --gradient-accent-start: 110 86% 50%;
+    --gradient-accent-end: 195 100% 55%;
+    
+    /* Dark Cards */
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+    --card-glass: 240 10% 6%;
+    
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Dark Brand Colors */
+    --primary: 270 91% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 270 91% 75%;
+    
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
+    
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 270 91% 65%;
+    
+    /* Dark Vibe Effects */
+    --glow-primary: 270 91% 65%;
+    --glow-secondary: 195 100% 65%;
+    --glow-accent: 110 86% 60%;
+    --particle-primary: 270 91% 65%;
+    --particle-secondary: 195 100% 65%;
+    --shimmer: 240 10% 20%;
+    
+    /* Dark Sidebar */
+    --sidebar-background: 240 6% 6%;
+    --sidebar-foreground: 240 5% 84%;
+    --sidebar-primary: 270 91% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 84%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 270 91% 65%;
   }
 }
 
@@ -101,5 +147,209 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism Effects */
+  .glass-card {
+    @apply bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 shadow-2xl;
+  }
+  
+  .glass-nav {
+    @apply bg-white/60 dark:bg-gray-900/60 backdrop-blur-lg border-b border-white/20 dark:border-gray-700/30;
+  }
+  
+  .glass-button {
+    @apply bg-white/20 dark:bg-gray-900/20 backdrop-blur-md border border-white/30 dark:border-gray-700/40;
+  }
+  
+  /* Gradient Text Effects */
+  .gradient-text {
+    @apply bg-gradient-to-r from-[hsl(var(--gradient-primary-start))] to-[hsl(var(--gradient-primary-end))] bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-secondary {
+    @apply bg-gradient-to-r from-[hsl(var(--gradient-secondary-start))] to-[hsl(var(--gradient-secondary-end))] bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-accent {
+    @apply bg-gradient-to-r from-[hsl(var(--gradient-accent-start))] to-[hsl(var(--gradient-accent-end))] bg-clip-text text-transparent;
+  }
+  
+  /* Gradient Backgrounds */
+  .gradient-bg-primary {
+    @apply bg-gradient-to-br from-[hsl(var(--gradient-primary-start))] to-[hsl(var(--gradient-primary-end))];
+  }
+  
+  .gradient-bg-secondary {
+    @apply bg-gradient-to-br from-[hsl(var(--gradient-secondary-start))] to-[hsl(var(--gradient-secondary-end))];
+  }
+  
+  .gradient-bg-accent {
+    @apply bg-gradient-to-br from-[hsl(var(--gradient-accent-start))] to-[hsl(var(--gradient-accent-end))];
+  }
+  
+  /* Glow Effects */
+  .glow-primary {
+    text-shadow: 0 0 20px hsl(var(--glow-primary) / 0.5);
+  }
+  
+  .glow-secondary {
+    text-shadow: 0 0 20px hsl(var(--glow-secondary) / 0.5);
+  }
+  
+  .glow-accent {
+    text-shadow: 0 0 20px hsl(var(--glow-accent) / 0.5);
+  }
+  
+  .box-glow-primary {
+    box-shadow: 0 0 30px hsl(var(--glow-primary) / 0.3);
+  }
+  
+  .box-glow-secondary {
+    box-shadow: 0 0 30px hsl(var(--glow-secondary) / 0.3);
+  }
+  
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .float-delay-1 {
+    animation-delay: -1s;
+  }
+  
+  .float-delay-2 {
+    animation-delay: -2s;
+  }
+  
+  .float-delay-3 {
+    animation-delay: -3s;
+  }
+  
+  /* Shimmer Effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--shimmer) / 0.4),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+  
+  /* Interactive Hover Effects */
+  .hover-float:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px hsl(var(--primary) / 0.15);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+  }
+  
+  /* Particle Container */
+  .particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  /* Gradient Mesh Background */
+  .gradient-mesh {
+    background: 
+      radial-gradient(circle at 25% 25%, hsl(var(--gradient-primary-start) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--gradient-secondary-start) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(var(--gradient-accent-start) / 0.1) 0%, transparent 50%);
+    animation: gradient-shift 20s ease infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.2);
+  }
+  100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Vibe Mode Specific Styles */
+.vibe-mode {
+  --tw-bg-opacity: 0.8;
+}
+
+.vibe-mode .tool-card {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.vibe-mode .hero-bg {
+  animation: hueRotate 30s linear infinite;
+}
+
+@keyframes hueRotate {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .float-animation,
+  .shimmer,
+  .pulse-glow,
+  .gradient-mesh,
+  .hero-bg {
+    animation: none !important;
+  }
+  
+  .hover-float:hover,
+  .hover-scale:hover {
+    transform: none !important;
   }
 }
