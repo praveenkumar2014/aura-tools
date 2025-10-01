@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { HeroSection } from '@/components/HeroSection';
+import { PartnersSection } from '@/components/PartnersSection';
 import { ToolsGrid } from '@/components/ToolsGrid';
 import { ParticleBackground } from '@/components/ParticleBackground';
 import { VibeToggle } from '@/components/VibeToggle';
@@ -106,6 +107,9 @@ const Index = () => {
       
       {/* Hero Section */}
       <HeroSection onSearch={handleSearch} />
+      
+      {/* Partners Section */}
+      <PartnersSection />
       
       {/* Stats Section */}
       <motion.section 

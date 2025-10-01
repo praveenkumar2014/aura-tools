@@ -2,18 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Menu, 
-  Search, 
-  Bell, 
-  User, 
-  Sparkles, 
-  Crown,
-  BookOpen,
-  TrendingUp,
-  Wallet
-} from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import logo from '@/assets/logo.png';
 
@@ -21,10 +10,10 @@ export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: 'Discover', icon: Search, href: '#discover' },
-    { label: 'Learning Paths', icon: BookOpen, href: '#learning' },
-    { label: 'Trending', icon: TrendingUp, href: '#trending' },
-    { label: 'Cashback', icon: Wallet, href: '#cashback' },
+    { label: 'Home', href: '#' },
+    { label: 'Features', href: '#features' },
+    { label: 'Resources', href: '#resources' },
+    { label: 'Pricing', href: '#pricing' },
   ];
 
   return (
@@ -51,11 +40,10 @@ export const Navigation = () => {
               <motion.a
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                className="text-foreground hover:text-primary transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <item.icon className="w-4 h-4" />
                 {item.label}
               </motion.a>
             ))}
@@ -65,27 +53,17 @@ export const Navigation = () => {
           <div className="flex items-center gap-3">
             <Button 
               size="sm" 
-              variant="outline" 
-              className="glass-button hover:hover-glow hidden sm:flex"
+              variant="ghost" 
+              className="hidden sm:flex hover:bg-white/10"
             >
-              <Bell className="w-4 h-4 mr-2" />
-              Notifications
+              Login
             </Button>
             
             <Button 
               size="sm" 
-              className="gradient-bg-primary hover:hover-glow border-0 text-white"
+              className="gradient-bg-primary hover:hover-glow border-0 text-white px-6"
             >
-              <Crown className="w-4 h-4 mr-2" />
-              Premium
-            </Button>
-
-            <Button
-              size="sm"
-              variant="outline"
-              className="glass-button"
-            >
-              <User className="w-4 h-4" />
+              Try For Free
             </Button>
 
             {/* Mobile Menu Button */}
@@ -115,7 +93,6 @@ export const Navigation = () => {
                 className="flex items-center gap-3 py-2 px-4 hover:bg-white/10 rounded-lg transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <item.icon className="w-4 h-4" />
                 {item.label}
               </a>
             ))}
