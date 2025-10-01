@@ -55,6 +55,7 @@ export const Navigation = () => {
               size="sm" 
               variant="ghost" 
               className="hidden sm:flex hover:bg-white/10"
+              onClick={() => window.location.href = '/auth'}
             >
               Login
             </Button>
@@ -62,6 +63,7 @@ export const Navigation = () => {
             <Button 
               size="sm" 
               className="gradient-bg-primary hover:hover-glow border-0 text-white px-6"
+              onClick={() => window.location.href = '/auth'}
             >
               Try For Free
             </Button>
