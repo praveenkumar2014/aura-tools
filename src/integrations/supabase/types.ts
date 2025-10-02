@@ -62,6 +62,42 @@ export type Database = {
         }
         Relationships: []
       }
+      AuraAi: {
+        Row: {
+          config: Json | null
+          created_at: string
+          description: string | null
+          id: number
+          model_type: string | null
+          name: string
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          config?: Json | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          model_type?: string | null
+          name?: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          config?: Json | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          model_type?: string | null
+          name?: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
