@@ -48,23 +48,25 @@ export const ParticleBackground = () => {
     },
     particles: {
       color: {
-        value: ["#1a365d", "#ff8c00", "#ff6b35"],  // Dark blue and orange theme
+        value: ["#0a0a0a", "#1a1a1a", "#ff8c00", "#ff6b35", "#ff9500"],  // Dark and orange only
       },
       links: {
-        color: "#1a365d",  // Dark blue links
+        color: "#ff8c00",  // Orange links
         distance: 150,
         enable: false,
         opacity: 0.2,
         width: 1,
       },
       move: {
-        direction: "none" as const,
+        direction: "bottom" as const,  // Particles fall down
         enable: true,
         outModes: {
-          default: "bounce" as const,
+          default: "out" as const,
+          bottom: "out" as const,
+          top: "none" as const,
         },
-        random: false,
-        speed: 1,
+        random: true,
+        speed: { min: 0.5, max: 2 },
         straight: false,
       },
       number: {
@@ -72,21 +74,21 @@ export const ParticleBackground = () => {
           enable: true,
           area: 800,
         },
-        value: vibeMode ? 80 : 40,
+        value: vibeMode ? 100 : 50,
       },
       opacity: {
-        value: vibeMode ? 0.8 : 0.4,
+        value: vibeMode ? 0.6 : 0.3,
         animation: {
           enable: true,
           speed: 1,
-          minimumValue: 0.1,
+          minimumValue: 0.05,
         },
       },
       shape: {
         type: ["circle", "triangle"],
       },
       size: {
-        value: { min: 1, max: 5 },
+        value: { min: 2, max: 8 },
         animation: {
           enable: true,
           speed: 2,

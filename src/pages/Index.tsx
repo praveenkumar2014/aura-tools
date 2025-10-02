@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { HeroSection } from '@/components/HeroSection';
 import { PartnersSection } from '@/components/PartnersSection';
@@ -8,7 +8,7 @@ import { ToolsGrid } from '@/components/ToolsGrid';
 import { ParticleBackground } from '@/components/ParticleBackground';
 import { VibeToggle } from '@/components/VibeToggle';
 import { AITool } from '@/components/ToolCard';
-import { sampleTools } from '@/data/sampleTools';
+import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -28,19 +28,50 @@ import {
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [tools, setTools] = useState<AITool[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch AI tools from Supabase
+  useEffect(() => {
+    const fetchTools = async () => {
+      const { data, error } = await supabase
+        .from('ai_tools')
+        .select('*')
+        .order('rating', { ascending: false });
+
+      if (data && !error) {
+        // Transform Supabase data to AITool format
+        const transformedTools: AITool[] = data.map(tool => ({
+          id: tool.id,
+          name: tool.name,
+          description: tool.description || '',
+          category: tool.category || 'Other',
+          rating: tool.rating || 0,
+          price: tool.price || 'Free',
+          isPremium: tool.is_premium || false,
+          image: tool.image_url || '',
+          tags: tool.tags || [],
+          url: tool.website_url || '#'
+        }));
+        setTools(transformedTools);
+      }
+      setIsLoading(false);
+    };
+
+    fetchTools();
+  }, []);
+
+  // Calculate categories dynamically from tools
   const categories = [
-    { id: 'all', name: 'All Tools', count: sampleTools.length },
-    { id: 'Language Models', name: 'Language Models', count: 2 },
-    { id: 'Image Generation', name: 'Image Generation', count: 2 },
-    { id: 'Video & Media', name: 'Video & Media', count: 3 },
-    { id: 'Development', name: 'Development', count: 1 },
-    { id: 'Marketing', name: 'Marketing', count: 2 },
-    { id: 'Productivity', name: 'Productivity', count: 1 },
-    { id: 'Writing', name: 'Writing', count: 1 },
+    { id: 'all', name: 'All Tools', count: tools.length },
+    ...Array.from(new Set(tools.map(t => t.category))).map(cat => ({
+      id: cat,
+      name: cat,
+      count: tools.filter(t => t.category === cat).length
+    }))
   ];
 
-  const filteredTools = sampleTools.filter(tool => {
+  const filteredTools = tools.filter(tool => {
     const matchesSearch = searchQuery === '' || 
       tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -66,33 +97,45 @@ const Index = () => {
   const stats = [
     { 
       icon: Brain, 
-      value: '1,000+', 
+      value: tools.length.toString(), 
       label: 'AI Tools', 
-      color: 'text-purple-500',
-      bgColor: 'bg-purple-500/10' 
+      color: 'text-primary',
+      bgColor: 'bg-primary/10' 
     },
     { 
       icon: Users, 
       value: '50K+', 
-      label: 'Active Learners', 
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10' 
+      label: 'Active Users', 
+      color: 'text-primary',
+      bgColor: 'bg-primary/10' 
     },
     { 
       icon: Wallet, 
       value: '₹2L+', 
       label: 'Cashback Earned', 
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10' 
+      color: 'text-primary',
+      bgColor: 'bg-primary/10' 
     },
     { 
       icon: TrendingUp, 
       value: '95%', 
       label: 'Success Rate', 
-      color: 'text-orange-500',
-      bgColor: 'bg-orange-500/10' 
+      color: 'text-primary',
+      bgColor: 'bg-primary/10' 
     },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <ParticleBackground />
+        <div className="text-center relative z-10">
+          <Sparkles className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading AI tools...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background relative">

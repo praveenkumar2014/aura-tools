@@ -12,7 +12,7 @@ export interface AITool {
   description: string;
   category: string;
   rating: number;
-  price: 'Free' | 'Freemium' | 'Paid';
+  price: string;
   isPremium?: boolean;
   image?: string;
   tags: string[];
@@ -100,8 +100,8 @@ export const ToolCard = ({ tool, onLearnMore }: ToolCardProps) => {
             </div>
             
             <Badge 
-              variant={tool.price === 'Free' ? 'default' : 'secondary'}
-              className={tool.price === 'Free' ? 'gradient-bg-accent text-white border-0' : ''}
+              variant={tool.price.toLowerCase().includes('free') ? 'default' : 'secondary'}
+              className={tool.price.toLowerCase().includes('free') ? 'gradient-bg-accent text-white border-0' : 'glass-button'}
             >
               {tool.price}
             </Badge>

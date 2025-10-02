@@ -45,7 +45,7 @@ const Dashboard = () => {
         .from('profiles')
         .select('*')
         .eq('user_id', session.user.id)
-        .single();
+        .maybeSingle();
       
       setProfile(profileData);
       setIsLoading(false);
