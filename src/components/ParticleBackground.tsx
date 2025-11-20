@@ -48,10 +48,10 @@ export const ParticleBackground = () => {
     },
     particles: {
       color: {
-        value: ["#0a0a0a", "#1a1a1a", "#ff8c00", "#ff6b35", "#ff9500"],  // Dark and orange only
+        value: ["#FF7F66", "#FF9966", "#33CCFF", "#66D9B8", "#A855F7", "#C084FC"],  // Logo colors: Coral, Orange, Cyan, Green, Purple, Violet
       },
       links: {
-        color: "#ff8c00",  // Orange links
+        color: "#FF7F66",  // Coral links
         distance: 150,
         enable: false,
         opacity: 0.2,

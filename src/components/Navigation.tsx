@@ -2,18 +2,49 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Menu } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, Shield } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/logo.png';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    setIsAuthenticated(!!session);
+    
+    if (session) {
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', session.user.id)
+        .eq('role', 'admin')
+        .maybeSingle();
+      
+      setIsAdmin(!!roleData);
+    }
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+    window.location.reload();
+  };
 
   const menuItems = [
-    { label: 'Home', href: '#' },
-    { label: 'Features', href: '#features' },
-    { label: 'Resources', href: '#resources' },
-    { label: 'Pricing', href: '#pricing' },
+    { label: 'Home', href: '/' },
+    { label: 'Dashboard', href: '/dashboard', requiresAuth: true },
+    { label: 'Profile', href: '/profile', requiresAuth: true },
+    { label: 'Admin', href: '/admin', requiresAuth: true, adminOnly: true },
   ];
 
   return (
@@ -36,37 +67,57 @@ export const Navigation = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
-            {menuItems.map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.label}
-              </motion.a>
-            ))}
+            {menuItems
+              .filter(item => {
+                if (item.adminOnly) return isAdmin;
+                if (item.requiresAuth) return isAuthenticated;
+                return true;
+              })
+              .map((item) => (
+                <motion.button
+                  key={item.label}
+                  onClick={() => navigate(item.href)}
+                  className="text-foreground hover:text-primary transition-colors flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item.adminOnly && <Shield className="w-4 h-4" />}
+                  {item.label}
+                </motion.button>
+              ))}
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            <Button 
-              size="sm" 
-              variant="ghost" 
-              className="hidden sm:flex hover:bg-white/10"
-              onClick={() => window.location.href = '/auth'}
-            >
-              Login
-            </Button>
-            
-            <Button 
-              size="sm" 
-              className="gradient-bg-primary hover:hover-glow border-0 text-white px-6"
-              onClick={() => window.location.href = '/auth'}
-            >
-              Try For Free
-            </Button>
+            {isAuthenticated ? (
+              <Button 
+                size="sm" 
+                variant="ghost" 
+                className="hidden sm:flex hover:bg-white/10"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
+            ) : (
+              <>
+                <Button 
+                  size="sm" 
+                  variant="ghost" 
+                  className="hidden sm:flex hover:bg-white/10"
+                  onClick={() => navigate('/auth')}
+                >
+                  Login
+                </Button>
+                
+                <Button 
+                  size="sm" 
+                  className="gradient-bg-primary hover:hover-glow border-0 text-white px-6"
+                  onClick={() => navigate('/auth')}
+                >
+                  Try For Free
+                </Button>
+              </>
+            )}
 
             {/* Mobile Menu Button */}
             <Button
@@ -88,16 +139,36 @@ export const Navigation = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden border-t border-white/20 pt-4 pb-4"
           >
-            {menuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="flex items-center gap-3 py-2 px-4 hover:bg-white/10 rounded-lg transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+            {menuItems
+              .filter(item => {
+                if (item.adminOnly) return isAdmin;
+                if (item.requiresAuth) return isAuthenticated;
+                return true;
+              })
+              .map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => {
+                    navigate(item.href);
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center gap-3 py-2 px-4 hover:bg-white/10 rounded-lg transition-colors w-full text-left"
+                >
+                  {item.adminOnly && <Shield className="w-4 h-4" />}
+                  {item.label}
+                </button>
+              ))}
+            {isAuthenticated && (
+              <button
+                onClick={() => {
+                  handleSignOut();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center gap-3 py-2 px-4 hover:bg-white/10 rounded-lg transition-colors w-full text-left text-destructive"
               >
-                {item.label}
-              </a>
-            ))}
+                Sign Out
+              </button>
+            )}
           </motion.div>
         )}
       </div>

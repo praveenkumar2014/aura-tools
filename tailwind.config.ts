@@ -57,23 +57,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Vibe Colors
+        // Vibe Colors - Logo-inspired (Coral, Cyan, Green, Purple)
         glass: {
           background: "hsl(var(--glass-background))",
           border: "hsl(var(--glass-border))",
         },
         gradient: {
-          "primary-start": "hsl(var(--gradient-primary-start))",
-          "primary-end": "hsl(var(--gradient-primary-end))",
-          "secondary-start": "hsl(var(--gradient-secondary-start))",
-          "secondary-end": "hsl(var(--gradient-secondary-end))",
-          "accent-start": "hsl(var(--gradient-accent-start))",
-          "accent-end": "hsl(var(--gradient-accent-end))",
+          "primary-start": "hsl(var(--gradient-primary-start))",  // Coral
+          "primary-end": "hsl(var(--gradient-primary-end))",      // Orange
+          "secondary-start": "hsl(var(--gradient-secondary-start))", // Cyan
+          "secondary-end": "hsl(var(--gradient-secondary-end))",    // Green
+          "accent-start": "hsl(var(--gradient-accent-start))",      // Purple
+          "accent-end": "hsl(var(--gradient-accent-end))",          // Violet
         },
         glow: {
-          primary: "hsl(var(--glow-primary))",
-          secondary: "hsl(var(--glow-secondary))",
-          accent: "hsl(var(--glow-accent))",
+          primary: "hsl(var(--glow-primary))",      // Coral glow
+          secondary: "hsl(var(--glow-secondary))",  // Cyan glow
+          accent: "hsl(var(--glow-accent))",        // Purple glow
         },
       },
       borderRadius: {
