@@ -44,7 +44,7 @@ const Dashboard = () => {
       const { data: profileData } = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', session.user.id)
+        .eq('id', session.user.id)
         .maybeSingle();
       
       setProfile(profileData);

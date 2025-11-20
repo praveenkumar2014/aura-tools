@@ -38,8 +38,8 @@ const Profile = () => {
       const { data: profile } = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', session.user.id)
-        .single();
+        .eq('id', session.user.id)
+        .maybeSingle();
       
       if (profile) {
         setProfileData({
@@ -62,7 +62,7 @@ const Profile = () => {
         .update({
           full_name: profileData.fullName,
         })
-        .eq('user_id', user.id);
+        .eq('id', user.id);
 
       if (error) throw error;
 

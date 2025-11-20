@@ -16,9 +16,8 @@ export type Database = {
     Tables: {
       ai_tools: {
         Row: {
-          category: string | null
-          created_at: string
-          created_by: string | null
+          category: string
+          created_at: string | null
           description: string | null
           id: string
           image_url: string | null
@@ -27,13 +26,11 @@ export type Database = {
           price: string | null
           rating: number | null
           tags: string[] | null
-          updated_at: string
           website_url: string | null
         }
         Insert: {
-          category?: string | null
-          created_at?: string
-          created_by?: string | null
+          category: string
+          created_at?: string | null
           description?: string | null
           id?: string
           image_url?: string | null
@@ -42,13 +39,11 @@ export type Database = {
           price?: string | null
           rating?: number | null
           tags?: string[] | null
-          updated_at?: string
           website_url?: string | null
         }
         Update: {
-          category?: string | null
-          created_at?: string
-          created_by?: string | null
+          category?: string
+          created_at?: string | null
           description?: string | null
           id?: string
           image_url?: string | null
@@ -57,124 +52,76 @@ export type Database = {
           price?: string | null
           rating?: number | null
           tags?: string[] | null
-          updated_at?: string
           website_url?: string | null
-        }
-        Relationships: []
-      }
-      AuraAi: {
-        Row: {
-          config: Json | null
-          created_at: string
-          description: string | null
-          id: number
-          model_type: string | null
-          name: string
-          status: string | null
-          updated_at: string | null
-          user_id: string | null
-        }
-        Insert: {
-          config?: Json | null
-          created_at?: string
-          description?: string | null
-          id?: number
-          model_type?: string | null
-          name?: string
-          status?: string | null
-          updated_at?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          config?: Json | null
-          created_at?: string
-          description?: string | null
-          id?: number
-          model_type?: string | null
-          name?: string
-          status?: string | null
-          updated_at?: string | null
-          user_id?: string | null
         }
         Relationships: []
       }
       profiles: {
         Row: {
           avatar_url: string | null
-          created_at: string
-          email: string
+          created_at: string | null
+          email: string | null
           full_name: string | null
           id: string
-          updated_at: string
-          user_id: string
+          updated_at: string | null
         }
         Insert: {
           avatar_url?: string | null
-          created_at?: string
-          email: string
+          created_at?: string | null
+          email?: string | null
           full_name?: string | null
-          id?: string
-          updated_at?: string
-          user_id: string
+          id: string
+          updated_at?: string | null
         }
         Update: {
           avatar_url?: string | null
-          created_at?: string
-          email?: string
+          created_at?: string | null
+          email?: string | null
           full_name?: string | null
           id?: string
-          updated_at?: string
-          user_id?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
       user_activity: {
         Row: {
+          activity_data: Json | null
           activity_type: string
-          created_at: string
+          created_at: string | null
           id: string
-          tool_id: string | null
           user_id: string
         }
         Insert: {
+          activity_data?: Json | null
           activity_type: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          tool_id?: string | null
           user_id: string
         }
         Update: {
+          activity_data?: Json | null
           activity_type?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          tool_id?: string | null
           user_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "user_activity_tool_id_fkey"
-            columns: ["tool_id"]
-            isOneToOne: false
-            referencedRelation: "ai_tools"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       user_favorites: {
         Row: {
-          created_at: string
+          created_at: string | null
           id: string
           tool_id: string
           user_id: string
         }
         Insert: {
-          created_at?: string
+          created_at?: string | null
           id?: string
           tool_id: string
           user_id: string
         }
         Update: {
-          created_at?: string
+          created_at?: string | null
           id?: string
           tool_id?: string
           user_id?: string
@@ -191,19 +138,16 @@ export type Database = {
       }
       user_roles: {
         Row: {
-          created_at: string
           id: string
           role: Database["public"]["Enums"]["app_role"]
           user_id: string
         }
         Insert: {
-          created_at?: string
           id?: string
-          role?: Database["public"]["Enums"]["app_role"]
+          role: Database["public"]["Enums"]["app_role"]
           user_id: string
         }
         Update: {
-          created_at?: string
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
