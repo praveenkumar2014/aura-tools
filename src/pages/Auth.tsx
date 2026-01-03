@@ -261,6 +261,23 @@ const Auth = () => {
                         {isLoading ? 'Signing in...' : 'Sign In'}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
+                      <Button
+                        type="submit"
+                        className="w-full gradient-bg-primary text-white"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? 'Signing in...' : 'Sign In'}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                      
+                      <Button
+                        type="button"
+                        variant="link"
+                        onClick={() => navigate('/forgot-password')}
+                        className="w-full text-primary"
+                      >
+                        Forgot your password?
+                      </Button>
                     </form>
                   </TabsContent>
 

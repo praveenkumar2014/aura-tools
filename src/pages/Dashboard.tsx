@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Navigation } from '@/components/Navigation';
 import { ParticleBackground } from '@/components/ParticleBackground';
 import { supabase } from '@/integrations/supabase/client';
@@ -18,7 +19,11 @@ import {
   BookOpen,
   LogOut,
   Settings,
-  Award
+  Award,
+  Bell,
+  Heart,
+  Clock,
+  ExternalLink
 } from 'lucide-react';
 
 const Dashboard = () => {
@@ -26,6 +31,8 @@ const Dashboard = () => {
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
+  const [favorites, setFavorites] = useState<any[]>([]);
+  const [activity, setActivity] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,6 +55,30 @@ const Dashboard = () => {
         .maybeSingle();
       
       setProfile(profileData);
+
+      // Fetch favorites count
+      const { data: favoritesData } = await supabase
+        .from('user_favorites')
+        .select('*, ai_tools(*)')
+        .eq('user_id', session.user.id)
+        .limit(5);
+      
+      if (favoritesData) {
+        setFavorites(favoritesData);
+      }
+
+      // Fetch recent activity
+      const { data: activityData } = await supabase
+        .from('user_activity')
+        .select('*')
+        .eq('user_id', session.user.id)
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      if (activityData) {
+        setActivity(activityData);
+      }
+
       setIsLoading(false);
     };
 
@@ -78,37 +109,31 @@ const Dashboard = () => {
     { 
       icon: BookOpen, 
       label: 'Tools Explored', 
-      value: '12',
+      value: activity.length.toString(),
       color: 'text-primary',
       bgColor: 'bg-primary/10'
     },
     { 
       icon: Star, 
       label: 'Favorites', 
-      value: '8',
+      value: favorites.length.toString(),
       color: 'text-primary',
       bgColor: 'bg-primary/10'
     },
     { 
       icon: Wallet, 
       label: 'Cashback Earned', 
-      value: '₹2,450',
+      value: '₹0',
       color: 'text-primary',
       bgColor: 'bg-primary/10'
     },
     { 
       icon: Award, 
       label: 'Learning Streak', 
-      value: '7 days',
+      value: '0 days',
       color: 'text-primary',
       bgColor: 'bg-primary/10'
     },
-  ];
-
-  const recentActivity = [
-    { tool: 'ChatGPT', action: 'Explored', time: '2 hours ago' },
-    { tool: 'Midjourney', action: 'Added to favorites', time: '5 hours ago' },
-    { tool: 'Runway ML', action: 'Started tutorial', time: '1 day ago' },
   ];
 
   if (isLoading) {
@@ -208,24 +233,32 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {recentActivity.map((activity, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
-                    >
-                      <div>
-                        <div className="font-medium text-foreground">
-                          {activity.tool}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {activity.action}
-                        </div>
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {activity.time}
-                      </div>
+                  {activity.length === 0 ? (
+                    <div className="text-center py-6 text-muted-foreground">
+                      <Clock className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                      <p>No recent activity</p>
+                      <p className="text-sm">Start exploring AI tools!</p>
                     </div>
-                  ))}
+                  ) : (
+                    activity.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+                      >
+                        <div>
+                          <div className="font-medium text-foreground">
+                            {item.activity_type}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {item.activity_data ? JSON.stringify(item.activity_data).substring(0, 30) : 'Activity'}
+                          </div>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {new Date(item.created_at).toLocaleDateString()}
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -255,9 +288,9 @@ const Dashboard = () => {
                 <Button
                   variant="outline"
                   className="w-full glass-button justify-start"
-                  onClick={() => navigate('/')}
+                  onClick={() => navigate('/favorites')}
                 >
-                  <Star className="w-4 h-4 mr-2" />
+                  <Heart className="w-4 h-4 mr-2" />
                   View Favorites
                 </Button>
                 <Button
